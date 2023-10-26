@@ -1,7 +1,7 @@
 <template>
   <div id="app" class="container">
     <SearchBar @inputChange="onInputChange"/>
-    <div class="video-layout">
+    <div class="row">
       <VideoDetail :video="selectedVideo"></VideoDetail>
       <VideoList @videoSelected="onVideoSelected" :videos="videos" />
     </div>
@@ -57,7 +57,4 @@ export default {
 </script>
 
 <style>
-  .video-layout {
-    display: flex;
-  }
 </style>
