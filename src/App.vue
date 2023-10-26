@@ -1,7 +1,10 @@
 <template>
   <div id="app" class="container">
     <SearchBar @inputChange="onInputChange"/>
-    <VideoList :videos="videos"/>
+    <div class="video-layout">
+      <VideoDetail :video="selectedVideo"></VideoDetail>
+      <VideoList @videoSelected="onVideoSelected" :videos="videos" />
+    </div>
   </div>
 </template>
 
@@ -9,6 +12,7 @@
 import axios from 'axios';
 import SearchBar from './components/SearchBar.vue';
 import VideoList from './components/VideoList.vue';
+import VideoDetail from './components/VideoDetail.vue';
 import videosAPIMock from './mocks/videosAPIMock'
 const API_KEY = 'AIzaSyBwJH-yPgWWz8OtIx4Ad6Uu9JrHlp4Ifac';
 
@@ -16,11 +20,13 @@ export default {
   name: 'App',
   components: {
     SearchBar,
-    VideoList
+    VideoList,
+    VideoDetail
   },
   data() {
     return {
-      videos: []
+      videos: [],
+      selectedVideo: null
     }
   },
   methods: {
@@ -42,18 +48,16 @@ export default {
           this.videos = videosAPIMock;
         }
       })
+    },
+    onVideoSelected(video) {
+      this.selectedVideo = video;
     }
   }
 }
 </script>
 
 <style>
-#app {
-  font-family: Avenir, Helvetica, Arial, sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-  text-align: center;
-  color: #2c3e50;
-  margin: 60px auto;
-}
+  .video-layout {
+    display: flex;
+  }
 </style>
